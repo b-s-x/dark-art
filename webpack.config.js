@@ -8,7 +8,7 @@ module.exports = {
 
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, "src", 'static/dist'),
   },
   module: {
     rules: [
@@ -29,9 +29,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      // template : './src/views/index.html',
       template : './src/views/index.pug',
-      // inject   : true
 })
   ],
   resolve: {

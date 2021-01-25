@@ -1,6 +1,6 @@
 <template>
   <div>
-    11111
+    VUE.JS
     <router-view></router-view>
   </div>
 </template>

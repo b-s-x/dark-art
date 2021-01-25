@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import App from './components/App'
 
-console.log(333);
-console.log("its working ffafsnfjj");
+console.log("MAIN.JS");
 
 const app = new Vue({
   el: '#app',

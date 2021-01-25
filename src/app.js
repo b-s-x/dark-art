@@ -8,7 +8,9 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"))
 
 app.get("*", (req, res) => {
-  res.render("index")
+  // res.render("index")
+  res.sendFile(path.resolve(__dirname, '../dist/index.html'))
+
 })
 
 app.listen(port, () => {

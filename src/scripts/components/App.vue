@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sun">
     VUE.JS
     <router-view></router-view>
   </div>
@@ -8,4 +8,13 @@
 <script>
 
 </script>
+
+<style lang="scss" scoped>
+$color: red;
+
+.sun {
+  background: $color;
+  font-size: 40px;
+}
+</style>
 

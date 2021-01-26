@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack')
@@ -6,7 +6,7 @@ const hotModuleScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeo
 
 module.exports = {
   mode: 'production',
-  entry: [hotModuleScript, "./src/scripts/main.js" ],
+  entry: [hotModuleScript, './src/scripts/main.js' ],
 
   output: {
     filename: 'main.js',
@@ -19,7 +19,9 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          hotReload: true
+          loader: {
+            scss: 'vue-style-loader!css-loader!sass-loader'
+          }
         }
       },
       {
@@ -28,14 +30,44 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        loader: 'pug-loader'
+        oneOf: [
+          {
+            resourceQuery: /^\?vue/,
+            use: ['pug-plain-loader']
+          },
+          {
+            use: ['raw-loader', 'pug-plain-loader']
+          }
+        ]
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: [
-          "vue-style-loader",
-          "css-loader",
-          "sass-loader",
+        test: /\.css$/,
+        use:  [
+          'vue-style-loader',
+          'style-loader',
+          {
+            loader:  'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use:  [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader:  'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+          },
         ],
       },
     ]
@@ -49,6 +81,6 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin()
   ],
   resolve: {
-    extensions: [".js", ".json", ".vue"],
+    extensions: ['.js', '.json', '.vue', '.scss'],
   }
 }

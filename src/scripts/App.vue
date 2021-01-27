@@ -11,9 +11,8 @@
     div.ff VUE
 </template>
 
-
 <script>
-import NewApp from "./NewApp"
+import NewApp from "./components/NewApp"
 export default {
   components: {
     NewApp,

@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import App from './App'
+import router from "./router"
 
-console.log("MAIN.JS");
-
-const app = new Vue({
-  el: '#app',
+new Vue({
+  router,
   render: h => h(App)
-});
+}).$mount("#app")

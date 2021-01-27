@@ -1,9 +1,14 @@
-<template>
-  <div class="sun">
-    <div class="ff">VUE.JS</div>
-    <new-app> </new-app>
-    <!-- <router-view></router-view> -->
-  </div>
+<template lang="pug">
+  div.main
+    div.ff VUE
+    div.ff VUE VUE
+    div.ff VUE VUE VUE
+    div.ff VUE VUE VUE VUE
+    div.ff VUE VUE VUE VUE VUE
+    div.ff VUE VUE VUE VUE
+    div.ff VUE VUE VUE
+    div.ff VUE VUE
+    div.ff VUE
 </template>
 
 
@@ -20,15 +25,15 @@ export default {
 <style lang="scss" scoped>
 $color: red;
 
+.main {
+  box-sizing: border-box;
+}
+
 .ff {
   background: $color;
-  color: $color;
+  color: white;
   font-size: 40px;
 }
 
-body {
-  background: red;
-  height: 100vh;
-}
 </style>
 

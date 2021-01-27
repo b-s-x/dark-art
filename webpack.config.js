@@ -1,18 +1,17 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack')
-const hotModuleScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'
 
 module.exports = {
   mode: 'production',
-  entry: [hotModuleScript, './src/scripts/main.js' ],
+  entry: './src/scripts/main.js',
 
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'src', 'static/dist'),
     publicPath: '/',
   },
+
   module: {
     rules: [
       {
@@ -77,8 +76,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template : './src/views/index.pug',
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
   ],
   resolve: {
     extensions: ['.js', '.json', '.vue', '.scss'],

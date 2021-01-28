@@ -2,10 +2,10 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack')
-const hotModuleScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
+const hotModuleScript = 'webpack-hot-middleware/client'//?path=/__webpack_hmr&timeout=20000&  '
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: [hotModuleScript, './src/scripts/main.js' ],
 
   output: {

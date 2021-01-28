@@ -1,6 +1,6 @@
 const express = require('express')
 const path = require('path')
-const { devMiddleware, hotMiddleware } = require('./server/HotModuleReload');
+const { devMiddleware, hotMiddleware } = require('./server/hot-module-reload');
 const app = express()
 
 const port = process.env.PORT || '8000'

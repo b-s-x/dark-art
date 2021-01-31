@@ -84,7 +84,8 @@ module.exports = {
     extensions: ['.js', '.json', '.vue', '.scss'],
     alias: {
       '@common': path.resolve(__dirname, 'src/styles/common.scss'),
-      '@components': path.resolve(__dirname, 'src/scripts/components/')
+      '@components': path.resolve(__dirname, 'src/scripts/components/'),
+      '@pages': path.resolve(__dirname, 'src/scripts/pages/'),
     }
   }
 }

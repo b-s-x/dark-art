@@ -1,15 +1,12 @@
 <template lang="pug">
-  div.main
+  div
     router-view/
 </template>
 
 <script>
-export default {
-}
-
+export default {}
 </script>
 
 <style lang="scss" scoped>
-
 </style>
 

@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
 
-$color: yellow;
+@import "@common";
 
 .class {
   background: $color;

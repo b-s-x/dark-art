@@ -82,5 +82,9 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js', '.json', '.vue', '.scss'],
+    alias: {
+      '@common': path.resolve(__dirname, 'src/styles/common.scss'),
+      '@components': path.resolve(__dirname, 'src/scripts/components/')
+    }
   }
 }

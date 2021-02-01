@@ -1,5 +1,5 @@
-<template lang="pug">
-  div
+<template lang='pug'>
+  div#app
     router-view/
 </template>
 
@@ -7,6 +7,10 @@
 export default {}
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
+
+#app {
+  box-sizing: border-box;
+}
 </style>
 

@@ -2,11 +2,11 @@
   div.main
     text-container.text-container
       text-item(
-        v-for='item of arrImg'
+        v-for='(item, index) of arrImg'
         :key='item.id'
         @mouseover="hover(item.id)"
+        :class="{active: activeIndex === index}"
         ) {{item.text}}
-
 </template>
 
 <script>
@@ -18,12 +18,14 @@ export default {
   data() {
     return {
       arrImg: [
-        { id: 0, text: 'text 1', src: '/images/black1.jpeg' },
-        { id: 1, text: 'text 2', src: '/images/black2.jpeg' },
-        { id: 2, text: 'text 3', src: '/images/black9.jpeg' },
-        { id: 3, text: 'text 4', src: '/images/black14.jpeg' },
-        { id: 4, text: 'text 5', src: '/images/black15.jpeg' },
-      ]
+        { id: 0, text: 'Mountain', src: '/images/black1.jpeg' },
+        { id: 1, text: 'Ocean', src: '/images/black2.jpeg' },
+        { id: 2, text: 'Smooth', src: '/images/black9.jpeg' },
+        { id: 3, text: 'Fog', src: '/images/black14.jpeg' },
+        { id: 4, text: 'Flower', src: '/images/black15.jpeg' },
+      ],
+
+      activeIndex: 0,
     }
   },
 
@@ -36,7 +38,9 @@ export default {
     hover(id) {
       const main = document.querySelector('.main')
       let url = this.arrImg[id].src
+
       this.imgBackground(main, url)
+      this.activeHover(id)
     },
 
     imgBackground(elem, url) {
@@ -50,6 +54,10 @@ export default {
       const main = document.querySelector('.main')
       let url = this.arrImg[0].src
       this.imgBackground(main, url)
+    },
+
+    activeHover(id) {
+      this.activeIndex = id
     }
   },
 
@@ -64,9 +72,13 @@ export default {
 @import '@common';
 
 .main {
-  height: 100vh;
   @include flex();
+  height: 100vh;
   background: black;
+}
+
+.active {
+  color: red
 }
 
 </style>

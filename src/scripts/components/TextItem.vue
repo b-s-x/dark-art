@@ -13,10 +13,14 @@ export default {
 @import '@common';
 
 .text-item {
-  margin-bottom: 50px;
+  margin: 25px 50px;
   max-width: 485px;
   text-align:center;
-
+  color: $grace;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.3;
+  letter-spacing: 3px;
+  transition: all 300ms linear;
   font: {
     size: 38px;
     weight: 900;

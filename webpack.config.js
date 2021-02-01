@@ -71,6 +71,14 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ]
   },
   plugins: [
@@ -83,9 +91,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.vue', '.scss'],
     alias: {
+      '@': path.resolve(__dirname),
       '@common': path.resolve(__dirname, 'src/styles/common.scss'),
       '@components': path.resolve(__dirname, 'src/scripts/components/'),
       '@pages': path.resolve(__dirname, 'src/scripts/pages/'),
+      '@images': path.resolve(__dirname, 'src/static/images/'),
     }
   }
 }

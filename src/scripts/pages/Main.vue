@@ -5,14 +5,18 @@ div.main
       v-for='(item, index) of arrImg'
       :key='item.id'
       @mouseover="hover(item.id)"
+      @mouseout="hoverEvent()"
       :class="{active: activeIndex === index}"
       ) {{item.text}}
+
+    page-cursor/
 </template>
 
 <script>
 
 import TextContainer from '@components/TextContainer'
 import TextItem from '@components/TextItem'
+import PageCursor from '@components/PageCursor'
 
 export default {
   data() {
@@ -32,6 +36,7 @@ export default {
   components: {
     TextContainer,
     TextItem,
+    PageCursor,
   },
 
   methods: {
@@ -41,6 +46,11 @@ export default {
 
       this.imgBackground(main, url)
       this.activeHover(id)
+      this.hoverEvent()
+    },
+
+    hoverEvent() {
+      this.$eventBus.$emit('eventHover');
     },
 
     imgBackground(elem, url) {

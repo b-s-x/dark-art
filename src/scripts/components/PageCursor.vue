@@ -33,30 +33,35 @@ export default {
   },
 
   mounted() {
-    this.$eventBus.$on('eventHover', this.toggleMouseHover);
     this.basic()
+    this.$eventBus.$on('eventHover', this.toggleMouseHover);
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
+$circleBorder: #fff;
+$circleShadow: 0 0 22px rgba(34, 29, 29, 0.418),
+  inset 0px 0px 10px rgba(0, 0, 0, 0.335);
+
+$hoverBodyCircle: rgba(255, 0, 0, 0.397);
+$hoverShadowCircle: rgba(255, 4, 3, 1);
+
 .cursor,
 .cursor2,
 .cursor3 {
-  position: fixed;
   border-radius: 50%;
+  position: fixed;
   transform: translateX(-50%) translateY(-50%);
   pointer-events: none;
   border: transparent;
-}
-
-.cursor2,
-.cursor3 {
   height: 34px;
   width: 34px;
   z-index: 99998;
   transition: all 0.3s ease-out;
 }
+
 .cursor2.hover,
 .cursor3.hover {
   transform: scale(1.7) translateX(-25%) translateY(-25%);
@@ -64,12 +69,11 @@ export default {
 }
 
 .cursor2 {
-  border: 2px solid #fff;
-  box-shadow: 0 0 22px rgba(34, 29, 29, 0.418),
-    inset 0px 0px 10px rgba(0, 0, 0, 0.335);
+  border: 2px solid $circleBorder;
+  box-shadow: $circleShadow;
 }
 .cursor2.hover {
-  background: rgba(255, 0, 0, 0.397);
-  box-shadow: 0 0 20px rgba(255, 4, 3, 1);
+  background: $hoverBodyCircle;
+  box-shadow: 0 0 20px $hoverShadowCircle;
 }
 </style>

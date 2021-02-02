@@ -84,13 +84,15 @@ export default {
 
 @import '@common';
 
+$activeColor: red;
+
 .main {
   @include flex();
   height: 100vh;
 }
 
 .active {
-  color: red
+  color: $activeColor;
 }
 
 // .back {

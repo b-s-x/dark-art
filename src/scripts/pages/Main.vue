@@ -1,12 +1,12 @@
 <template lang='pug'>
-  div.main
-    text-container.text-container
-      text-item(
-        v-for='(item, index) of arrImg'
-        :key='item.id'
-        @mouseover="hover(item.id)"
-        :class="{active: activeIndex === index}"
-        ) {{item.text}}
+div.main
+  text-container.text-container
+    text-item(
+      v-for='(item, index) of arrImg'
+      :key='item.id'
+      @mouseover="hover(item.id)"
+      :class="{active: activeIndex === index}"
+      ) {{item.text}}
 </template>
 
 <script>
@@ -48,6 +48,9 @@ export default {
       elem.style.backgroundSize = 'cover';
       elem.style.backgroundPosition = 'center center';
       elem.style.backgroundRepeat = 'no-repeat';
+      elem.style.transition = 'all 300ms ease-out 0.5s';
+
+      // elem.classList.add("back")
     },
 
     firstBackground() {
@@ -74,11 +77,17 @@ export default {
 .main {
   @include flex();
   height: 100vh;
-  background: black;
 }
 
 .active {
   color: red
 }
+
+// .back {
+//   background-size: cover;
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   transition: all 300ms ease-out 0.5s;
+// }
 
 </style>

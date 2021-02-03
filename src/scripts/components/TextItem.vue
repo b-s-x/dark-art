@@ -21,6 +21,7 @@ export default {
   line-height: 1.3;
   letter-spacing: 3px;
   transition: all 300ms linear;
+  user-select: none;
   font: {
     size:  calc(38px + 0.5vw);
     weight: 900;

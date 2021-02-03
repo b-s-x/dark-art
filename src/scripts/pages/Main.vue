@@ -10,6 +10,7 @@ div.main
       ) {{item.text}}
 
     page-cursor/
+  side-nav/
 </template>
 
 <script>
@@ -17,6 +18,7 @@ div.main
 import TextContainer from '@components/TextContainer'
 import TextItem from '@components/TextItem'
 import PageCursor from '@components/PageCursor'
+import SideNav from '@components/SideNav'
 
 export default {
   data() {
@@ -37,14 +39,14 @@ export default {
     TextContainer,
     TextItem,
     PageCursor,
+    SideNav,
   },
 
   methods: {
     hover(id) {
-      const main = document.querySelector('.main')
       let url = this.arrImg[id].src
 
-      this.imgBackground(main, url)
+      this.imgBackground(url)
       this.activeHover(id)
       this.hoverEvent()
     },
@@ -53,20 +55,20 @@ export default {
       this.$eventBus.$emit('eventHover');
     },
 
-    imgBackground(elem, url) {
-      elem.style.background = `url(${url})`
-      elem.style.backgroundSize = 'cover';
-      elem.style.backgroundPosition = 'center center';
-      elem.style.backgroundRepeat = 'no-repeat';
-      elem.style.transition = 'all 300ms ease-out 0.5s';
+    imgBackground(url) {
+      const main = document.querySelector('.main')
+      main.style.background = `url(${url})`
+      main.style.backgroundSize = 'cover';
+      main.style.backgroundPosition = 'center center';
+      main.style.backgroundRepeat = 'no-repeat';
+      main.style.transition = 'all 300ms ease-out 0.5s';
 
-      // elem.classList.add("back")
+      // main.classList.add("back")
     },
 
     firstBackground() {
-      const main = document.querySelector('.main')
       let url = this.arrImg[0].src
-      this.imgBackground(main, url)
+      this.imgBackground(url)
     },
 
     activeHover(id) {

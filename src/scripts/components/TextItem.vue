@@ -22,7 +22,7 @@ export default {
   letter-spacing: 3px;
   transition: all 300ms linear;
   font: {
-    size: 38px;
+    size:  calc(38px + 0.5vw);
     weight: 900;
   };
 }

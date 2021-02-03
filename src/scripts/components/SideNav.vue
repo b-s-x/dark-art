@@ -1,0 +1,109 @@
+<template lang="pug">
+div
+  div.sidenav(
+    :class="animation()"
+    )
+    a(href="#") About
+    a(href="#") Services
+    a(href="#") Clients
+    a(href="#") Contact
+
+  span.burger-icon(
+    @click="openCloseNav()"
+    :class="{visible: isVisible}"
+    ) &#9776;
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isVisible: false,
+    }
+  },
+
+  methods: {
+    openCloseNav() {
+      this.isVisible = !this.isVisible
+    },
+
+    animation() {
+      if(this.isVisible) return 'animation'
+      else return 'animationOut'
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+$primary: white;
+$background: #111;
+$text: #818181;
+$transitionText: 0.3s;
+
+.visible {
+  color: $primary;
+}
+
+.burger-icon {
+  position: fixed;
+  right: 50px;
+  top: 50px;
+  z-index: 9999;
+  font-size: 40px;
+  cursor: pointer;
+  color: $text;
+
+  &:hover {
+    color: $primary;
+    transition: $transitionText;
+  }
+}
+
+.sidenav {
+  height: 100%;
+  width: clamp(15%, 22%, 30%);
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding-top: 100px;
+  z-index: 1;
+  background-color: $background;
+  opacity: 0.8;
+  overflow-x: hidden;
+}
+
+a {
+  display: block;
+  padding: 8px;
+  margin: 8px;
+  padding-left: 24px;
+  font-size: calc(25px + 0.6vw);
+  text-decoration: none;
+  color: $text;
+  transition: $transitionText;
+  opacity: 1;
+
+  &:hover {
+    color:  $primary;
+    opacity: 1;
+  }
+}
+
+.animation {
+  animation: move 1s ease-in-out;
+  width: 20%;
+}
+
+.animationOut {
+  transition: all 1s ease-in-out;
+  width: 0;
+}
+
+@keyframes move {
+ from { width: 0; }
+ to { width: 20%; }
+}
+
+</style>

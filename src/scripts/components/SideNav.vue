@@ -43,22 +43,23 @@ $text: #818181;
 $transitionText: 0.3s;
 
 .visible {
-  color: $primary;
+  color: $text !important;
+  &:hover {
+    color: $primary !important;
+    transition: $transitionText;
+  }
 }
 
 .burger-icon {
   position: fixed;
-  right: 50px;
-  top: 50px;
+  right: 40px;
+  top: 40px;
   z-index: 9999;
   font-size: 40px;
   cursor: pointer;
-  color: $text;
+  color: black;
 
-  &:hover {
-    color: $primary;
-    transition: $transitionText;
-  }
+  
 }
 
 .sidenav {

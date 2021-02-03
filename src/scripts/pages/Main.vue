@@ -2,7 +2,7 @@
 div.main
   text-container.text-container
     text-item(
-      v-for='(item, index) of arrImg'
+      v-for='(item, index) of selectActiveArrayImages'
       :key='item.id'
       @mouseover="hover(item.id)"
       @mouseout="hoverEvent()"
@@ -20,18 +20,13 @@ import TextItem from '@components/TextItem'
 import PageCursor from '@components/PageCursor'
 import SideNav from '@components/SideNav'
 
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
-      arrImg: [
-        { id: 0, text: 'Mountain', src: '/images/black1.jpeg' },
-        { id: 1, text: 'Ocean', src: '/images/black2.jpeg' },
-        { id: 2, text: 'Smooth', src: '/images/black9.jpeg' },
-        { id: 3, text: 'Fog', src: '/images/black14.jpeg' },
-        { id: 4, text: 'Flower', src: '/images/black15.jpeg' },
-      ],
-
       activeIndex: 0,
+      activeArrayImage: 'green',
     }
   },
 
@@ -42,17 +37,29 @@ export default {
     SideNav,
   },
 
+  computed: {
+    ...mapGetters({
+      black: 'arrGreenGetters',
+      green: 'arrBlackGetters',
+    }),
+
+    selectActiveArrayImages() {
+      if(this.activeArrayImage === 'black') {
+        return this.green
+      } else if(this.activeArrayImage === 'green') {
+        return this.black
+      }
+    }
+  },
+
   methods: {
     hover(id) {
-      let url = this.arrImg[id].src
+      let arr = this.selectActiveArrayImages
+      let url = arr[id].src
 
       this.imgBackground(url)
       this.activeHover(id)
       this.hoverEvent()
-    },
-
-    hoverEvent() {
-      this.$eventBus.$emit('eventHover');
     },
 
     imgBackground(url) {
@@ -66,9 +73,13 @@ export default {
       // main.classList.add("back")
     },
 
-    firstBackground() {
-      let url = this.arrImg[0].src
+    firstBackground(arr) {
+      let url = arr[0].src
       this.imgBackground(url)
+    },
+
+    hoverEvent() {
+      this.$eventBus.$emit('eventHover');
     },
 
     activeHover(id) {
@@ -77,7 +88,7 @@ export default {
   },
 
   mounted() {
-    this.firstBackground()
+    this.firstBackground(this.selectActiveArrayImages)
   }
 }
 </script>

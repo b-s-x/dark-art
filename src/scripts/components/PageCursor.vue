@@ -35,6 +35,10 @@ export default {
   mounted() {
     this.basic()
     this.$eventBus.$on('eventHover', this.toggleMouseHover);
+  },
+
+  beforeDestroy() {
+    this.$eventBus.$off('eventHover', this.toggleMouseHover);
   }
 }
 </script>

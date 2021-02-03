@@ -12,5 +12,10 @@ export default new VueRouter({
       name: 'root',
       component: Main
     },
+
+    // {
+    //   path: '*',
+    //   component: 404
+    // }
   ]
 })

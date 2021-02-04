@@ -26,7 +26,6 @@ export default {
   data() {
     return {
       activeIndex: 0,
-      activeArrayImage: 'green',
     }
   },
 
@@ -41,12 +40,13 @@ export default {
     ...mapGetters({
       black: 'arrGreenGetters',
       green: 'arrBlackGetters',
+      arrActive: 'arrActive',
     }),
 
     selectActiveArrayImages() {
-      if(this.activeArrayImage === 'black') {
+      if(this.arrActive === 'black') {
         return this.green
-      } else if(this.activeArrayImage === 'green') {
+      } else if(this.arrActive === 'green') {
         return this.black
       }
     }
@@ -54,17 +54,19 @@ export default {
 
   methods: {
     hover(id) {
-      let arr = this.selectActiveArrayImages
-      let url = arr[id].src
-
-      this.imgBackground(url)
-      this.activeHover(id)
+      this.imgBackground(id)
       this.hoverEvent()
+
+      this.activeIndex = id
     },
 
-    imgBackground(url) {
+    imgBackground(id) {
+      const arr = this.selectActiveArrayImages
+      const url = arr[id].src
+
       const main = document.querySelector('.main')
       main.style.background = `url(${url})`
+
       main.style.backgroundSize = 'cover';
       main.style.backgroundPosition = 'center center';
       main.style.backgroundRepeat = 'no-repeat';
@@ -73,22 +75,13 @@ export default {
       // main.classList.add("back")
     },
 
-    firstBackground(arr) {
-      let url = arr[0].src
-      this.imgBackground(url)
-    },
-
     hoverEvent() {
       this.$eventBus.$emit('eventHover');
     },
-
-    activeHover(id) {
-      this.activeIndex = id
-    }
   },
 
   mounted() {
-    this.firstBackground(this.selectActiveArrayImages)
+     this.imgBackground(0)
   }
 }
 </script>

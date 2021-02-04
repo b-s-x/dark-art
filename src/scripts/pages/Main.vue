@@ -7,6 +7,7 @@ div.main
       @mouseover="hover(item.id)"
       @mouseout="hoverEvent()"
       :class="{active: activeIndex === index}"
+      :style="{'color': currentColor}"
       ) {{item.text}}
 
     page-cursor/
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       activeIndex: 0,
+      currentColor: 'black'
     }
   },
 
@@ -47,12 +49,16 @@ export default {
 
     selectActiveArrayImages() { //?? this need remake
       if(this.arrActive === 'black') {
+        this.currentColor = 'black'
         return this.green
       } else if(this.arrActive === 'green') {
+        this.currentColor = 'white'
         return this.black
       } else if(this.arrActive === 'darkRed') {
+        this.currentColor = 'white'
         return this.darkRed
       } else if(this.arrActive === 'hand') {
+        this.currentColor = '#7a7a7a'
         return this.hand
       }
     }
@@ -82,7 +88,7 @@ export default {
     reloadFirstImage() {
       let id = 0
       this.imgBackground(id)
-    }
+    },
   },
 
   created() {
@@ -95,7 +101,8 @@ export default {
 
   mounted() {
      this.imgBackground(0)
-  }
+  },
+
 }
 </script>
 
@@ -111,7 +118,7 @@ $activeColor: red;
 }
 
 .active {
-  color: $activeColor;
+  color: red !important;
 }
 
 .background {

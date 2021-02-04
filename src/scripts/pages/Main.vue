@@ -65,14 +65,8 @@ export default {
       const url = arr[id].src
 
       const main = document.querySelector('.main')
-      main.style.background = `url(${url})`
-
-      main.style.backgroundSize = 'cover';
-      main.style.backgroundPosition = 'center center';
-      main.style.backgroundRepeat = 'no-repeat';
-      main.style.transition = 'all 300ms ease-out 0.5s';
-
-      // main.classList.add("back")
+      main.classList.add("background")
+      main.style.backgroundImage = `url(${url})`
     },
 
     hoverEvent() {
@@ -101,11 +95,11 @@ $activeColor: red;
   color: $activeColor;
 }
 
-// .back {
-//   background-size: cover;
-//   background-position: center center;
-//   background-repeat: no-repeat;
-//   transition: all 300ms ease-out 0.5s;
-// }
+.background {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: all 300ms ease-out 0.5s;
+}
 
 </style>

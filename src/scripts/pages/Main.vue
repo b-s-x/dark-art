@@ -40,14 +40,20 @@ export default {
     ...mapGetters({
       black: 'arrGreenGetters',
       green: 'arrBlackGetters',
+      darkRed: 'arrDarkRedGetters',
+      hand: 'arrHandGetters',
       arrActive: 'arrActive',
     }),
 
-    selectActiveArrayImages() {
+    selectActiveArrayImages() { //?? this need remake
       if(this.arrActive === 'black') {
         return this.green
       } else if(this.arrActive === 'green') {
         return this.black
+      } else if(this.arrActive === 'darkRed') {
+        return this.darkRed
+      } else if(this.arrActive === 'hand') {
+        return this.hand
       }
     }
   },

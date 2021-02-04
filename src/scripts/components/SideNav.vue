@@ -6,6 +6,7 @@ div
     div.text(href="#" @click="changeActive('black')") Black
     div.text(href="#" @click="changeActive('green')") Green
     div.text(href="#" @click="changeActive('darkRed')") Dark Red
+    div.text(href="#" @click="changeActive('hand')") Hands
 
   span.burger-icon(
     @click="openCloseNav()"

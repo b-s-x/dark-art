@@ -3,10 +3,9 @@ div
   div.sidenav(
     :class="animation()"
     )
-    a(href="#") About
-    a(href="#") Services
-    a(href="#") Clients
-    a(href="#") Contact
+    div.text(href="#") Black
+    div.text(href="#") Green
+    div.text(href="#") Dark Red
 
   span.burger-icon(
     @click="openCloseNav()"
@@ -44,6 +43,7 @@ $transitionText: 0.3s;
 
 .visible {
   color: $text !important;
+
   &:hover {
     color: $primary !important;
     transition: $transitionText;
@@ -58,8 +58,6 @@ $transitionText: 0.3s;
   font-size: 40px;
   cursor: pointer;
   color: black;
-
-  
 }
 
 .sidenav {
@@ -75,13 +73,12 @@ $transitionText: 0.3s;
   overflow-x: hidden;
 }
 
-a {
+.text {
   display: block;
   padding: 8px;
   margin: 8px;
   padding-left: 24px;
   font-size: calc(25px + 0.6vw);
-  text-decoration: none;
   color: $text;
   transition: $transitionText;
   opacity: 1;

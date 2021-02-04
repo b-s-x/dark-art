@@ -3,9 +3,9 @@ div
   div.sidenav(
     :class="animation()"
     )
-    div.text(href="#") Black
-    div.text(href="#") Green
-    div.text(href="#") Dark Red
+    div.text(href="#" @click="changeActive('black')") Black
+    div.text(href="#" @click="changeActive('green')") Green
+    div.text(href="#" @click="changeActive('darkRed')") Dark Red
 
   span.burger-icon(
     @click="openCloseNav()"
@@ -29,6 +29,11 @@ export default {
     animation() {
       if(this.isVisible) return 'animation'
       else return 'animationOut'
+    },
+
+    changeActive(arr) {
+      this.$store.commit('changeActiveArr', arr)
+      this.$eventBus.$emit('reloadImage')
     }
   }
 }

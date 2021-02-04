@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    activeArrayImage: 'green',
+    activeArrayImage: 'black',
 
     arrBlack: [
       { id: 0, text: 'Mountain', src: '/images/black/1.jpeg' },
@@ -36,5 +36,9 @@ export default new Vuex.Store({
     }
   },
   actions: {},
-  mutations: {},
+  mutations: {
+    changeActiveArr(state, arr) {
+      state.activeArrayImage = arr
+    }
+  },
 })

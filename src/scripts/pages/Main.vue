@@ -72,6 +72,19 @@ export default {
     hoverEvent() {
       this.$eventBus.$emit('eventHover');
     },
+
+    reloadFirstImage() {
+      let id = 0
+      this.imgBackground(id)
+    }
+  },
+
+  created() {
+    this.$eventBus.$on('reloadImage', this.reloadFirstImage)
+  },
+
+  beforeDestroy() {
+    this.$eventBus.$off('reloadImage', this.reloadFirstImage)
   },
 
   mounted() {

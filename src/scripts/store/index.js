@@ -8,6 +8,7 @@ export default new Vuex.Store({
     activeArrayImage: 'black',
 
     mapSection: ['black', 'green', 'darkRed', 'hand'],
+    mapColor: ['black', 'white', '#7a7a7a'],
 
     arrBlack: [
       { id: 0, text: 'Mountain', src: '/images/black/1.jpeg' },
@@ -63,6 +64,10 @@ export default new Vuex.Store({
     mapSection: (state) => {
       return state.mapSection
     },
+
+    mapColor: (state) => {
+      return state.mapColor
+    }
   },
   actions: {},
   mutations: {

@@ -12,6 +12,7 @@ div
     @click="openCloseNav()"
     :class="{visible: isVisible}"
     ) &#9776;
+
 </template>
 
 <script>

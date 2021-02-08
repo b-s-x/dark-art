@@ -1,30 +1,27 @@
 <template lang='pug'>
 div.main
-  text-container.text-container
-    text-item(
-      v-for='(item, index) of selectActiveArrayImages'
-      :key='item.id'
-      @mouseover="hover(item.id)"
-      @mouseout="hoverEvent()"
-      :class="{active: activeIndex === index}"
-      :style="{'color': currentColor}"
-      ) {{item.text}}
+  text-container.text-container(
+    :selectActiveArrayImages="selectActiveArrayImages"
+    @mouseHoverCustom="hover($event)"
+    @mouseOutCustom="hoverEvent()"
+    :class="{ active: activeIndex }"
+    :activeIndex="activeIndex"
+    :currentColor="currentColor"
+  )
 
-    page-cursor/
+  page-cursor/
 
   side-nav(
     @changeActive="changeActive($event)"
     :navSectionName='navSectionName'
-    )
+  )
+
 </template>
 
 
 <script>
-//text container принять text-item и отрендерить на верхнем уровне
-// влоденность
 
 import TextContainer from '@components/TextContainer'
-import TextItem from '@components/TextItem'
 import PageCursor from '@components/PageCursor'
 import SideNav from '@components/SideNav'
 
@@ -46,7 +43,6 @@ export default {
 
   components: {
     TextContainer,
-    TextItem,
     PageCursor,
     SideNav,
   },
@@ -59,20 +55,21 @@ export default {
       hand: 'arrHandGetters',
       arrActive: 'arrActive',
       mapSection: 'mapSection',
+      mapColor: 'mapColor',
     }),
 
-    selectActiveArrayImages() { //?? this need remake
+    selectActiveArrayImages() {
       if(this.arrActive === 'black') {
-        this.currentColor = 'black'
+        this.currentColor = this.mapColor[0]
         return this.green
       } else if(this.arrActive === 'green') {
-        this.currentColor = 'white'
+        this.currentColor = this.mapColor[1]
         return this.black
       } else if(this.arrActive === 'darkRed') {
-        this.currentColor = 'white'
+        this.currentColor = this.mapColor[1]
         return this.darkRed
       } else if(this.arrActive === 'hand') {
-        this.currentColor = '#7a7a7a'
+        this.currentColor = this.mapColor[2]
         return this.hand
       }
     }
@@ -120,7 +117,7 @@ export default {
   },
 
   mounted() {
-     this.setImageBackground(0)
+     this.setImageBackground(0);
   },
 
 }
@@ -130,15 +127,9 @@ export default {
 
 @import '@common';
 
-$activeColor: red;
-
 .main {
   @include flex();
   height: 100vh;
-}
-
-.active {
-  color: red !important;
 }
 
 .background {

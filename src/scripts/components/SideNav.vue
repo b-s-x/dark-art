@@ -1,12 +1,12 @@
 <template lang="pug">
 div
   div.sidenav(
-    :class="animation()"
-    )
-    div.text(href="#" @click="changeActive('black')") Black
-    div.text(href="#" @click="changeActive('green')") Green
-    div.text(href="#" @click="changeActive('darkRed')") Dark Red
-    div.text(href="#" @click="changeActive('hand')") Hands
+    :class="animation()")
+
+    div.text(
+      v-for="(item, index) of navSectionName"
+      @click="changeActive(index)"
+      ) {{item.name}}
 
   span.burger-icon(
     @click="openCloseNav()"
@@ -22,6 +22,10 @@ export default {
     }
   },
 
+  props: {
+    navSectionName: { type: Array, default: () => [] },
+  },
+
   methods: {
     openCloseNav() {
       this.isVisible = !this.isVisible
@@ -35,10 +39,9 @@ export default {
     changeActive(arr) {
       this.$emit('changeActive', arr)
     }
-  }
+  },
 }
 
-// изменение категории вынести в main
 </script>
 
 <style lang="scss" scoped>

@@ -11,7 +11,11 @@ div.main
       ) {{item.text}}
 
     page-cursor/
-  side-nav(@changeActive="changeActive($event)")/
+
+  side-nav(
+    @changeActive="changeActive($event)"
+    :navSectionName='navSectionName'
+    )
 </template>
 
 
@@ -30,7 +34,13 @@ export default {
   data() {
     return {
       activeIndex: 0,
-      currentColor: 'black'
+      currentColor: 'black',
+      navSectionName: [
+        { name: "Black" },
+        { name: "Green" },
+        { name: "Dark Red" },
+        { name: "Hands" },
+      ]
     }
   },
 
@@ -48,6 +58,7 @@ export default {
       darkRed: 'arrDarkRedGetters',
       hand: 'arrHandGetters',
       arrActive: 'arrActive',
+      mapSection: 'mapSection',
     }),
 
     selectActiveArrayImages() { //?? this need remake
@@ -95,7 +106,7 @@ export default {
     },
 
     changeActive(event) {
-      this.$store.commit('changeActiveArr', event);
+      this.$store.commit('changeActiveArr', this.mapSection[event]);
       this.$emit('reloadFirstImage');
     }
   },

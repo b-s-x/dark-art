@@ -3,23 +3,21 @@ div
   div.cursor
   div.cursor2
   div.cursor3
+
 </template>
 
 <script>
 export default {
   methods: {
-    basic() {
+    setBasicSetupCursor() {
       const cursor1 = document.querySelector(".cursor")
       const cursor2 = document.querySelector(".cursor2")
-      const cursor3 = document.querySelector(".cursor3")
 
       document.addEventListener("mousemove", (event) => {
         cursor1.style.left = event.clientX + "px"
         cursor1.style.top = event.clientY + "px"
         cursor2.style.left = event.clientX + "px"
         cursor2.style.top = event.clientY + "px"
-        cursor3.style.left = event.clientX + "px"
-        cursor3.style.top = event.clientY + "px"
       });
     },
 
@@ -33,7 +31,7 @@ export default {
   },
 
   mounted() {
-    this.basic()
+    this.setBasicSetupCursor()
     this.$eventBus.$on('eventHover', this.toggleMouseHover);
   },
 

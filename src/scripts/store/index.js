@@ -39,6 +39,13 @@ export default new Vuex.Store({
       { id: 4, text: 'Happy', src: '/images/hand/5.jpeg' },
       { id: 5, text: 'Peace', src: '/images/hand/6.jpeg' },
     ],
+
+    navSectionName: [
+      { name: "Black" },
+      { name: "Green" },
+      { name: "Dark Red" },
+      { name: "Hands" },
+    ]
   },
   getters: {
     arrGreenGetters:(state) => {
@@ -67,6 +74,10 @@ export default new Vuex.Store({
 
     mapColor: (state) => {
       return state.mapColor
+    },
+
+    navSectionName: (state) => {
+      return state.navSectionName
     }
   },
   actions: {},

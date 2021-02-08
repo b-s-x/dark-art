@@ -32,12 +32,6 @@ export default {
     return {
       activeIndex: 0,
       currentColor: 'black',
-      navSectionName: [
-        { name: "Black" },
-        { name: "Green" },
-        { name: "Dark Red" },
-        { name: "Hands" },
-      ]
     }
   },
 
@@ -56,6 +50,7 @@ export default {
       arrActive: 'arrActive',
       mapSection: 'mapSection',
       mapColor: 'mapColor',
+      navSectionName: 'navSectionName',
     }),
 
     selectActiveArrayImages() {

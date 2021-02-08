@@ -93,7 +93,7 @@ export default {
     },
 
     hoverEvent() {
-      this.$eventBus.$emit('eventHover');
+      this.$root.$emit('eventHover')
     },
 
     reloadFirstImage() {

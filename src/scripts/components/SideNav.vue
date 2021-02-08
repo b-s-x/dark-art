@@ -33,11 +33,12 @@ export default {
     },
 
     changeActive(arr) {
-      this.$store.commit('changeActiveArr', arr)
-      this.$eventBus.$emit('reloadImage')
+      this.$emit('changeActive', arr)
     }
   }
 }
+
+// изменение категории вынести в main
 </script>
 
 <style lang="scss" scoped>

@@ -11,10 +11,13 @@ div.main
       ) {{item.text}}
 
     page-cursor/
-  side-nav/
+  side-nav(@changeActive="changeActive($event)")/
 </template>
 
+
 <script>
+//text container принять text-item и отрендерить на верхнем уровне
+// влоденность
 
 import TextContainer from '@components/TextContainer'
 import TextItem from '@components/TextItem'
@@ -66,19 +69,19 @@ export default {
 
   methods: {
     hover(id) {
-      this.imgBackground(id)
+      this.setImageBackground(id)
       this.hoverEvent()
 
       this.activeIndex = id
     },
 
-    imgBackground(id) {
+    setImageBackground(id) {
       const arr = this.selectActiveArrayImages
       const url = arr[id].src
 
-      const main = document.querySelector('.main')
-      main.classList.add("background")
-      main.style.backgroundImage = `url(${url})`
+      const main = document.querySelector('.main');
+      main.classList.add("background");
+      main.style.backgroundImage = `url(${url})`;
     },
 
     hoverEvent() {
@@ -86,21 +89,27 @@ export default {
     },
 
     reloadFirstImage() {
-      let id = 0
-      this.imgBackground(id)
+      let id = 0;
+      this.setImageBackground(id);
+      this.activeIndex = 0;
     },
+
+    changeActive(event) {
+      this.$store.commit('changeActiveArr', event);
+      this.$emit('reloadFirstImage');
+    }
   },
 
   created() {
-    this.$eventBus.$on('reloadImage', this.reloadFirstImage)
+    this.$on('reloadFirstImage', this.reloadFirstImage)
   },
 
   beforeDestroy() {
-    this.$eventBus.$off('reloadImage', this.reloadFirstImage)
+    this.$off('reloadFirstImage', this.reloadFirstImage)
   },
 
   mounted() {
-     this.imgBackground(0)
+     this.setImageBackground(0)
   },
 
 }

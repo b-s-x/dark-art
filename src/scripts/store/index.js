@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     activeArrayImage: 'black',
 
+    mapSection: ['black', 'green', 'darkRed', 'hand'],
+
     arrBlack: [
       { id: 0, text: 'Mountain', src: '/images/black/1.jpeg' },
       { id: 1, text: 'Ocean', src: '/images/black/2.jpeg' },
@@ -56,7 +58,11 @@ export default new Vuex.Store({
 
     arrActive:(state) => {
       return state.activeArrayImage
-    }
+    },
+
+    mapSection: (state) => {
+      return state.mapSection
+    },
   },
   actions: {},
   mutations: {

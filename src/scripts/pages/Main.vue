@@ -9,6 +9,8 @@ div.main
     :currentColor="currentColor"
   )
 
+  //- v-if-else(v-if="this.loading") NOTHING
+
   page-cursor/
 
   side-nav(
@@ -43,27 +45,28 @@ export default {
 
   computed: {
     ...mapGetters({
-      black: 'arrGreenGetters',
-      green: 'arrBlackGetters',
+      black: 'arrBlackGetters',
+      green: 'arrGreenGetters',
       darkRed: 'arrDarkRedGetters',
       hand: 'arrHandGetters',
       arrActive: 'arrActive',
       mapSection: 'mapSection',
       mapColor: 'mapColor',
       navSectionName: 'navSectionName',
+      // loading: 'onLoading'
     }),
 
     selectActiveArrayImages() {
-      if(this.arrActive === 'black') {
+      if(this.arrActive === this.mapSection[0]) {
         this.currentColor = this.mapColor[0]
-        return this.green
-      } else if(this.arrActive === 'green') {
-        this.currentColor = this.mapColor[1]
         return this.black
-      } else if(this.arrActive === 'darkRed') {
+      } else if(this.arrActive === this.mapSection[1]) {
+        this.currentColor = this.mapColor[1]
+        return this.green
+      } else if(this.arrActive === this.mapSection[2]) {
         this.currentColor = this.mapColor[1]
         return this.darkRed
-      } else if(this.arrActive === 'hand') {
+      } else if(this.arrActive === this.mapSection[3]) {
         this.currentColor = this.mapColor[2]
         return this.hand
       }
@@ -100,7 +103,11 @@ export default {
     changeActive(event) {
       this.$store.commit('changeActiveArr', this.mapSection[event]);
       this.$emit('reloadFirstImage');
-    }
+    },
+  },
+
+  async beforeCreate() {
+    await this.$store.dispatch('fetchArray')
   },
 
   created() {
@@ -112,9 +119,8 @@ export default {
   },
 
   mounted() {
-     this.setImageBackground(0);
+    this.setImageBackground(0);
   },
-
 }
 </script>
 

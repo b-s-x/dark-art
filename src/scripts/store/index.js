@@ -10,6 +10,8 @@ export default new Vuex.Store({
     mapSection: ['black', 'green', 'darkRed', 'hand'],
     mapColor: ['black', 'white', '#7a7a7a'],
 
+    // loading: true,
+
     arrBlack: [
       { id: 0, text: 'Mountain', src: '/images/black/1.jpeg' },
       { id: 1, text: 'Ocean', src: '/images/black/2.jpeg' },
@@ -17,28 +19,11 @@ export default new Vuex.Store({
       { id: 3, text: 'Clouds', src: '/images/black/4.jpeg' },
       { id: 4, text: 'Flower', src: '/images/black/5.jpeg' },
     ],
-    arrGreen: [
-      { id: 0, text: 'Fern', src: '/images/green/1.jpeg' },
-      { id: 1, text: 'Lawn', src: '/images/green/2.jpeg' },
-      { id: 2, text: 'Herb', src: '/images/green/3.jpeg' },
-      { id: 3, text: 'Evergreen', src: '/images/green/4.jpeg' },
-      { id: 4, text: 'Sorrel', src: '/images/green/5.jpeg' },
-    ],
-    arrDarkRed: [
-      { id: 0, text: 'Red', src: '/images/darkRed/1.jpeg' },
-      { id: 1, text: 'Rose', src: '/images/darkRed/2.jpeg' },
-      { id: 2, text: 'Guppy', src: '/images/darkRed/3.jpeg' },
-      { id: 3, text: 'Hibiscus', src: '/images/darkRed/4.jpeg' },
-      { id: 4, text: 'Blossom', src: '/images/darkRed/5.jpeg' },
-    ],
-    arrHand: [
-      { id: 0, text: 'Power', src: '/images/hand/1.jpeg' },
-      { id: 1, text: 'Creation', src: '/images/hand/2.jpeg' },
-      { id: 2, text: 'Meet', src: '/images/hand/3.jpeg' },
-      { id: 3, text: 'Love', src: '/images/hand/4.jpeg' },
-      { id: 4, text: 'Happy', src: '/images/hand/5.jpeg' },
-      { id: 5, text: 'Peace', src: '/images/hand/6.jpeg' },
-    ],
+
+    // arrBlack: null,
+    arrGreen: null,
+    arrDarkRed: null,
+    arrHand: null,
 
     navSectionName: [
       { name: "Black" },
@@ -78,12 +63,36 @@ export default new Vuex.Store({
 
     navSectionName: (state) => {
       return state.navSectionName
+    },
+
+    onLoading: (state) => {
+      return state.loading
     }
   },
-  actions: {},
+  actions: {
+    fetchArray({commit}) {
+      fetch('array.json')
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          commit('changeData', data)
+        })
+    }
+  },
   mutations: {
     changeActiveArr(state, arr) {
       state.activeArrayImage = arr
+    },
+
+    changeData(state, arr) {
+      for(let item in arr) {
+
+        state[item] = arr[item]
+        console.log('все загрузилось');
+      }
+
+      // state.loading = false
     }
   },
 })

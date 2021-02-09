@@ -11,8 +11,8 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(devMiddleware, hotMiddleware)
 
+app.use(express.static(`${__dirname}/static/files`));
 app.use(express.static(`${__dirname}/static`))
-app.use(express.static('static/dist'))
 
 app.use('*', (req, res) => {
   const indexPath = path.resolve(__dirname, './static/dist/index.html');

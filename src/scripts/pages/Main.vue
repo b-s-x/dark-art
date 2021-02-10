@@ -81,7 +81,7 @@ export default {
       this.activeIndex = id
     },
 
-    setImageBackground(id) {
+    setImageBackground(id = 0) {
       const arr = this.selectActiveArrayImages
       const url = arr[id].src
 
@@ -119,7 +119,7 @@ export default {
   },
 
   mounted() {
-    this.setImageBackground(0);
+    this.setImageBackground();
   },
 }
 </script>

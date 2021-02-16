@@ -5,7 +5,7 @@ div
 
     div.text(
       v-for="name of names"
-      @click="changeActive(name)"
+      @click="$emit('changeActive', name)"
       ) {{name}}
 
   span.burger-icon(
@@ -31,15 +31,10 @@ export default {
     openCloseNav() {
       this.isVisible = !this.isVisible
     },
-
     animation() {
       if(this.isVisible) return 'animation'
       else return 'animationOut'
     },
-
-    changeActive(nextName) {
-      this.$emit('changeActive', nextName);
-    }
   },
 }
 

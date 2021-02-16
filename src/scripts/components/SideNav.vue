@@ -4,9 +4,9 @@ div
     :class="animation()")
 
     div.text(
-      v-for="(item, index) of navSectionName"
-      @click="changeActive(index)"
-      ) {{item.name}}
+      v-for="name of names"
+      @click="changeActive(name)"
+      ) {{name}}
 
   span.burger-icon(
     @click="openCloseNav()"
@@ -24,7 +24,7 @@ export default {
   },
 
   props: {
-    navSectionName: { type: Array, default: () => [] },
+    names: { type: Array, default: () => [] },
   },
 
   methods: {
@@ -37,8 +37,8 @@ export default {
       else return 'animationOut'
     },
 
-    changeActive(arr) {
-      this.$emit('changeActive', arr)
+    changeActive(nextName) {
+      this.$emit('changeActive', nextName);
     }
   },
 }

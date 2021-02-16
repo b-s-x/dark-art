@@ -1,7 +1,7 @@
 <template lang='pug'>
 div.main
   text-container.text-container(
-    :selectActiveArrayImages="selectActiveArrayImages"
+    :currentImageSet="currentImageSet"
     @mouseHoverCustom="hover($event)"
     @mouseOutCustom="hoverEvent()"
     :class="{ active: activeIndex }"
@@ -15,7 +15,7 @@ div.main
 
   side-nav(
     @changeActive="changeActive($event)"
-    :navSectionName='navSectionName'
+    :names="imageSetNames"
   )
 
 </template>
@@ -27,7 +27,11 @@ import TextContainer from '@components/TextContainer'
 import PageCursor from '@components/PageCursor'
 import SideNav from '@components/SideNav'
 
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
+
+const imageSetNames = function() {
+  return this.imageSets.map(s => s.name);
+};
 
 export default {
   data() {
@@ -45,32 +49,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      black: 'arrBlackGetters',
-      green: 'arrGreenGetters',
-      darkRed: 'arrDarkRedGetters',
-      hand: 'arrHandGetters',
-      arrActive: 'arrActive',
-      mapSection: 'mapSection',
       mapColor: 'mapColor',
-      navSectionName: 'navSectionName',
-      // loading: 'onLoading'
     }),
-
-    selectActiveArrayImages() {
-      if (this.arrActive === this.mapSection[0]) {
-        this.currentColor = this.mapColor[0]
-        return this.black
-      } else if(this.arrActive === this.mapSection[1]) {
-        this.currentColor = this.mapColor[1]
-        return this.green
-      } else if(this.arrActive === this.mapSection[2]) {
-        this.currentColor = this.mapColor[1]
-        return this.darkRed
-      } else if(this.arrActive === this.mapSection[3]) {
-        this.currentColor = this.mapColor[2]
-        return this.hand
-      }
-    }
+    ...mapState({
+      currentImageSet: 'currentImageSet',
+      imageSets: 'imageSets',
+    }),
+    imageSetNames,
   },
 
   methods: {
@@ -82,8 +67,7 @@ export default {
     },
 
     setImageBackground(id = 0) {
-      const arr = this.selectActiveArrayImages
-      const url = arr[id].src
+      const url = this.currentImageSet.images[id].src
       console.log('about to set loaded image: ', url);
 
       const main = document.querySelector('.main');
@@ -101,8 +85,8 @@ export default {
       this.activeIndex = 0;
     },
 
-    changeActive(event) {
-      this.$store.commit('changeActiveArr', this.mapSection[event]);
+    changeActive(nextName) {
+      this.$store.commit('changeActiveSetByName', nextName);
       this.$emit('reloadFirstImage');
     },
   },
@@ -117,6 +101,7 @@ export default {
 
   async mounted() {
     await this.$store.dispatch('fetchArray');
+    // this.loading = false;
 
     this.setImageBackground();
   },

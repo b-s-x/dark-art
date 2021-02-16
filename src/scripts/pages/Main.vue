@@ -57,7 +57,7 @@ export default {
     }),
 
     selectActiveArrayImages() {
-      if(this.arrActive === this.mapSection[0]) {
+      if (this.arrActive === this.mapSection[0]) {
         this.currentColor = this.mapColor[0]
         return this.black
       } else if(this.arrActive === this.mapSection[1]) {
@@ -84,6 +84,7 @@ export default {
     setImageBackground(id = 0) {
       const arr = this.selectActiveArrayImages
       const url = arr[id].src
+      console.log('about to set loaded image: ', url);
 
       const main = document.querySelector('.main');
       main.classList.add("background");
@@ -106,10 +107,6 @@ export default {
     },
   },
 
-  async beforeCreate() {
-    await this.$store.dispatch('fetchArray')
-  },
-
   created() {
     this.$on('reloadFirstImage', this.reloadFirstImage)
   },
@@ -118,7 +115,9 @@ export default {
     this.$off('reloadFirstImage', this.reloadFirstImage)
   },
 
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch('fetchArray');
+
     this.setImageBackground();
   },
 }

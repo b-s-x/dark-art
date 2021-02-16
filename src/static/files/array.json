@@ -1,7 +1,8 @@
 [
-	{	
+	{
 		"id": "black",
 		"name": "Black",
+		"color": "black",
 		"images": [
 			{"id":0,"text":"Mountain","src":"/images/black/1.jpeg"},
 			{"id":1,"text":"Ocean","src":"/images/black/2.jpeg"},
@@ -13,6 +14,7 @@
 	{
 		"id": "green",
 		"name": "Green",
+		"color": "white",
 		"images": [
 			{"id":0,"text":"Fern","src":"/images/green/1.jpeg"},
 			{"id":1,"text":"Lawn","src":"/images/green/2.jpeg"},
@@ -24,6 +26,7 @@
 	{
 		"id": "red",
 		"name": "Dark Red",
+		"color": "white",
 		"images": [
 			{"id":0,"text":"Red","src":"/images/darkRed/1.jpeg"},
 			{"id":1,"text":"Rose","src":"/images/darkRed/2.jpeg"},
@@ -35,6 +38,7 @@
 	{
 		"id": "hands",
 		"name": "Hands",
+		"color": "#7a7a7a",
 		"images": [
 			{"id":0,"text":"Power","src":"/images/hand/1.jpeg"},
 			{"id":1,"text":"Creation","src":"/images/hand/2.jpeg"},

@@ -5,41 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    // mapSection: ['black', 'green', 'darkRed', 'hand'],
-    mapColor: ['black', 'white', '#7a7a7a'],
-
     imageSets: [],
     currentImageSet: null,
   },
-  getters: {
-    arrActive:(state) => {
-      return state.activeArrayImage
-    },
 
-    mapSection: (state) => {
-      return state.mapSection
-    },
+  getters: {},
 
-    mapColor: (state) => {
-      return state.mapColor
-    },
-
-    navSectionName: (state) => {
-      return state.navSectionName
-    },
-
-    onLoading: (state) => {
-      return state.loading
-    }
-  },
   actions: {
     async fetchArray({ commit }) {
-      const res = await fetch('files/array.json');
-      const data = await res.json();
+      const result = await fetch('files/array.json');
+      const data = await result.json();
 
       commit('changeData', data);
     }
   },
+
   mutations: {
     changeActiveSetByName(state, imageSetName) {
       state.currentImageSet = state.imageSets.find(s => s.name == imageSetName);

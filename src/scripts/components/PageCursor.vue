@@ -32,13 +32,7 @@ export default {
 
   mounted() {
     this.setBasicSetupCursor()
-    this.$root.$on('eventHover', this.toggleMouseHover);
-
   },
-
-  beforeDestroy() {
-    this.$root.$off('eventHover', this.toggleMouseHover);
-  }
 }
 </script>
 

@@ -3,9 +3,9 @@
     text-item(
       v-for='(img, index) of currentImages'
       :key='img.id'
-      @mouseover="$emit('mouseHoverCustom', index)"
+      @mouseover="mouseHoverCustom(index)"
       @mouseout="$emit('mouseOutCustom')"
-      :class="{active: activeIndex === index}"
+      :class="{active: currentIndex === index}"
       :style="{'color': currentColor}"
       ) {{img.text}}
 
@@ -20,15 +20,31 @@ export default {
     TextItem,
   },
 
+  data() {
+    return {
+      currentIndex: 0
+    }
+  },
+
   props: {
     currentImageSet: { type: Object, default: () => null },
-    activeIndex: { type: Number, default: 0 },
     currentColor: { type: String, default: 'black' },
   },
 
   computed: {
     currentImages() {
       return this.currentImageSet ? this.currentImageSet.images : [];
+    },
+  },
+
+  methods: {
+    mouseHoverCustom(index) {
+      this.$emit('mouseHoverCustom')
+      this.setCurrentIndex(index)
+    },
+
+    setCurrentIndex(index) {
+      this.currentIndex = index
     }
   }
 }

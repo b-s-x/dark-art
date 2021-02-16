@@ -1,17 +1,14 @@
 <template lang='pug'>
 div.main
   text-container.text-container(
+    ref="textContainer"
     :currentImageSet="currentImageSet"
     @mouseHoverCustom="hover($event)"
     @mouseOutCustom="hoverEvent()"
-    :class="{ active: activeIndex }"
-    :activeIndex="activeIndex"
-    :currentColor="currentColor"
+    :currentColor="setCurrentColorText"
   )
 
-  //- v-if-else(v-if="this.loading") NOTHING
-
-  page-cursor
+  page-cursor(ref="cursor")
 
   side-nav(
     @changeActive="changeActive($event)"
@@ -27,19 +24,17 @@ import TextContainer from '@components/TextContainer'
 import PageCursor from '@components/PageCursor'
 import SideNav from '@components/SideNav'
 
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 const imageSetNames = function() {
   return this.imageSets.map(s => s.name);
 };
 
+const setCurrentColorText = function() {
+  return this.currentImageSet?.color
+};
+
 export default {
-  data() {
-    return {
-      activeIndex: 0,
-      currentColor: 'black',
-    }
-  },
 
   components: {
     TextContainer,
@@ -48,40 +43,36 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      mapColor: 'mapColor',
-    }),
     ...mapState({
       currentImageSet: 'currentImageSet',
       imageSets: 'imageSets',
     }),
+
     imageSetNames,
+    setCurrentColorText,
   },
 
   methods: {
     hover(id) {
       this.setImageBackground(id)
       this.hoverEvent()
-
-      this.activeIndex = id
     },
 
     setImageBackground(idx = 0) {
       const url = this.currentImageSet.images[idx].src;
-      console.log('about to set loaded image: ', url);
-
       const main = document.querySelector('.main');
+
       main.classList.add("background");
       main.style.backgroundImage = `url(${url})`;
     },
 
     hoverEvent() {
-      this.$root.$emit('eventHover')
+      this.$refs.cursor.toggleMouseHover()
     },
 
     resetFirstImage() {
       this.setImageBackground(0);
-      this.activeIndex = 0;
+      this.$refs.textContainer.setCurrentIndex(0)
     },
 
     changeActive(nextName) {
@@ -92,8 +83,6 @@ export default {
 
   async mounted() {
     await this.$store.dispatch('fetchArray');
-    // this.loading = false;
-
     this.setImageBackground();
   },
 }

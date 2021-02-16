@@ -1,13 +1,13 @@
 <template lang='pug'>
   div.text-container
     text-item(
-      v-for='(item, index) of selectActiveArrayImages'
-      :key='item.id'
-      @mouseover="$emit('mouseHoverCustom', item.id)"
+      v-for='(img, index) of currentImages'
+      :key='img.id'
+      @mouseover="$emit('mouseHoverCustom', index)"
       @mouseout="$emit('mouseOutCustom')"
       :class="{active: activeIndex === index}"
       :style="{'color': currentColor}"
-      ) {{item.text}}
+      ) {{img.text}}
 
 </template>
 
@@ -21,9 +21,15 @@ export default {
   },
 
   props: {
-    selectActiveArrayImages: { type: Array, default: () => [] },
+    currentImageSet: { type: Object, default: () => null },
     activeIndex: { type: Number, default: 0 },
     currentColor: { type: String, default: 'black' },
+  },
+
+  computed: {
+    currentImages() {
+      return this.currentImageSet ? this.currentImageSet.images : [];
+    }
   }
 }
 </script>

@@ -11,7 +11,7 @@ div.main
 
   //- v-if-else(v-if="this.loading") NOTHING
 
-  page-cursor/
+  page-cursor
 
   side-nav(
     @changeActive="changeActive($event)"
@@ -66,8 +66,8 @@ export default {
       this.activeIndex = id
     },
 
-    setImageBackground(id = 0) {
-      const url = this.currentImageSet.images[id].src
+    setImageBackground(idx = 0) {
+      const url = this.currentImageSet.images[idx].src;
       console.log('about to set loaded image: ', url);
 
       const main = document.querySelector('.main');
@@ -79,24 +79,15 @@ export default {
       this.$root.$emit('eventHover')
     },
 
-    reloadFirstImage() {
-      let id = 0;
-      this.setImageBackground(id);
+    resetFirstImage() {
+      this.setImageBackground(0);
       this.activeIndex = 0;
     },
 
     changeActive(nextName) {
       this.$store.commit('changeActiveSetByName', nextName);
-      this.$emit('reloadFirstImage');
+      this.resetFirstImage();
     },
-  },
-
-  created() {
-    this.$on('reloadFirstImage', this.reloadFirstImage)
-  },
-
-  beforeDestroy() {
-    this.$off('reloadFirstImage', this.reloadFirstImage)
   },
 
   async mounted() {

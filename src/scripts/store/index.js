@@ -12,13 +12,14 @@ export default new Vuex.Store({
 
     // loading: true,
 
-    arrBlack: [
-      { id: 0, text: 'Mountain', src: '/images/black/1.jpeg' },
-      { id: 1, text: 'Ocean', src: '/images/black/2.jpeg' },
-      { id: 2, text: 'Smooth', src: '/images/black/3.jpeg' },
-      { id: 3, text: 'Clouds', src: '/images/black/4.jpeg' },
-      { id: 4, text: 'Flower', src: '/images/black/5.jpeg' },
-    ],
+    arrBlack: null,
+    // arrBlack: [
+    //   { id: 0, text: 'Mountain', src: '/images/black/1.jpeg' },
+    //   { id: 1, text: 'Ocean', src: '/images/black/2.jpeg' },
+    //   { id: 2, text: 'Smooth', src: '/images/black/3.jpeg' },
+    //   { id: 3, text: 'Clouds', src: '/images/black/4.jpeg' },
+    //   { id: 4, text: 'Flower', src: '/images/black/5.jpeg' },
+    // ],
 
     // arrBlack: null,
     arrGreen: null,
@@ -70,14 +71,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    fetchArray({commit}) {
-      fetch('array.json')
-        .then((response) => {
-          return response.json()
-        })
-        .then((data) => {
-          commit('changeData', data)
-        })
+    async fetchArray({ commit }) {
+      const res = await fetch('array.json');
+      const data = await res.json();
+
+      commit('changeData', data);
     }
   },
   mutations: {

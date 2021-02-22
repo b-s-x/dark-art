@@ -39,7 +39,7 @@ export default {
 
   methods: {
     mouseHoverCustom(index) {
-      this.$emit('mouseHoverCustom')
+      this.$emit('mouseHoverCustom', index)
       this.setCurrentIndex(index)
     },
 

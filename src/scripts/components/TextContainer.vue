@@ -6,7 +6,7 @@
       @mouseover="mouseHoverCustom(index)"
       @mouseout="$emit('mouseOutCustom')"
       :class="{active: currentIndex === index}"
-      :style="{'color': currentColor}"
+      :style="{'color': currentTextColor}"
       ) {{img.text}}
 
 </template>
@@ -28,7 +28,7 @@ export default {
 
   props: {
     currentImageSet: { type: Object, default: () => null },
-    currentColor: { type: String, default: 'black' },
+    currentTextColor: { type: String, default: 'black' },
   },
 
   computed: {

@@ -1,20 +1,24 @@
 <template lang='pug'>
-div.main
-  text-container.text-container(
-    ref="textContainer"
+div
+  div.main
+    text-container.text-container(
+      ref="textContainer"
+      :currentImageSet="currentImageSet"
+      @mouseHoverCustom="hover($event)"
+      @mouseOutCustom="hoverEvent()"
+      :currentTextColor="currentTextColor"
+    )
+
+    page-cursor(ref="cursor")
+
+    side-nav(
+      @changeActive="changeActive($event)"
+      :names="imageSetNames"
+    )
+
+  accordion.accordion(
     :currentImageSet="currentImageSet"
-    @mouseHoverCustom="hover($event)"
-    @mouseOutCustom="hoverEvent()"
-    :currentColor="setCurrentColorText"
   )
-
-  page-cursor(ref="cursor")
-
-  side-nav(
-    @changeActive="changeActive($event)"
-    :names="imageSetNames"
-  )
-
 </template>
 
 
@@ -23,6 +27,7 @@ div.main
 import TextContainer from '@components/TextContainer'
 import PageCursor from '@components/PageCursor'
 import SideNav from '@components/SideNav'
+import Accordion from '@components/Accordion'
 
 import { mapState } from 'vuex';
 
@@ -30,16 +35,22 @@ const imageSetNames = function() {
   return this.imageSets.map(s => s.name);
 };
 
-const setCurrentColorText = function() {
+const currentTextColor = function() {
   return this.currentImageSet?.color
 };
 
 export default {
+  data() {
+    return {
+      currentImageIdx: 0,
+    }
+  },
 
   components: {
     TextContainer,
     PageCursor,
     SideNav,
+    Accordion,
   },
 
   computed: {
@@ -49,12 +60,14 @@ export default {
     }),
 
     imageSetNames,
-    setCurrentColorText,
+    currentTextColor,
+
   },
 
   methods: {
     hover(id) {
       this.setImageBackground(id)
+      this.currentImageIdx = id
       this.hoverEvent()
     },
 
@@ -102,6 +115,12 @@ export default {
   background-position: center center;
   background-repeat: no-repeat;
   transition: all 300ms ease-out 0.5s;
+}
+
+.accordion {
+  margin-top: 100px;
+  margin-bottom: 400px;
+  height: 400px;
 }
 
 </style>

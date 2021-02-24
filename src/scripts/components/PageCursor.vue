@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   div.cursor
-  div.cursor2(:class="toggle()")
+  div.cursor2(:class="toggle")
   div.cursor3
 
 </template>
@@ -11,6 +11,12 @@ export default {
 
   props: {
     toggleHover: { type: Boolean, default: false }
+  },
+
+  computed: {
+    toggle() {
+      if(this.toggleHover) return "hover"
+    }
   },
 
   methods: {
@@ -24,10 +30,6 @@ export default {
         cursor2.style.left = event.clientX + "px"
         cursor2.style.top = event.clientY + "px"
       });
-    },
-
-    toggle() {
-      if(this.toggleHover) return "hover"
     },
   },
 

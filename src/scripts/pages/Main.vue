@@ -9,7 +9,7 @@ div
       :currentTextColor="currentTextColor"
     )
 
-    page-cursor(ref="cursor")
+    page-cursor(ref="cursor" :toggleHover="toggleHover")
 
     side-nav(@changeActive="changeActive($event)", :names="imageSetNames")
 
@@ -35,7 +35,9 @@ const currentTextColor = function () {
 
 export default {
   data() {
-    return {};
+    return {
+      toggleHover: false,
+    };
   },
 
   components: {
@@ -70,7 +72,7 @@ export default {
     },
 
     hoverEvent() {
-      this.$refs.cursor.toggleMouseHover();
+      this.toggleHover = !this.toggleHover
     },
 
     resetFirstImage() {
@@ -90,6 +92,10 @@ export default {
   },
 };
 </script>
+
+
+
+// prop в pageCursor
 
 <style lang='scss' scoped>
 @import "@common";
@@ -114,6 +120,13 @@ export default {
 
 .animate {
   // animation: show 20s ease;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
 }
 
 </style>

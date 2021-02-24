@@ -1,13 +1,18 @@
 <template lang="pug">
 div
   div.cursor
-  div.cursor2
+  div.cursor2(:class="toggle()")
   div.cursor3
 
 </template>
 
 <script>
 export default {
+
+  props: {
+    toggleHover: { type: Boolean, default: false }
+  },
+
   methods: {
     setBasicSetupCursor() {
       const cursor1 = document.querySelector(".cursor")
@@ -21,17 +26,14 @@ export default {
       });
     },
 
-    toggleMouseHover() {
-      const cursor2 = document.querySelector(".cursor2")
-      const cursor3 = document.querySelector(".cursor3")
-
-      cursor2.classList.toggle("hover")
-      cursor3.classList.toggle("hover")
-    }
+    toggle() {
+      if(this.toggleHover) return "hover"
+    },
   },
 
   mounted() {
     this.setBasicSetupCursor()
+
   },
 }
 </script>
